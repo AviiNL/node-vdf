@@ -36,6 +36,11 @@ function _symtostr(line, i, token) {
     }
 
     finalstr = line.substring(opening, closing);
+
+    var n = finalstr.indexOf('//');
+    finalstr = finalstr.substring(0, n !== -1 ? n : finalstr.length).replace(/"/g, '').trim();
+
+    console.log(`'${finalstr}'`);
     return [finalstr, i + finalstr.length + 1];
 }
 
@@ -47,7 +52,7 @@ function _unquotedtostr(line, i) {
         }
         ci += 1;
     }
-    return [line.substring(i, ci), ci];
+    return [line.substring(i, ci-1), ci-1];
 }
 
 function _parse(stream, ptr) {
@@ -60,6 +65,7 @@ function _parse(stream, ptr) {
         next_is_value = false,
         deserialized = {};
 
+    stream = stream.toString();
     while (i < stream.length) {
         var c = stream.substring(i, i + 1);
 
@@ -79,7 +85,7 @@ function _parse(stream, ptr) {
             i = _string[1];
         }
         else if (c === COMMENT) {
-            if ((i + 1) < stream.length && stream.substring(i + 1, i + 2) === "/") {
+            if ((i + 1) < stream.length && stream.substring(i + 1, i + 2) === COMMENT) {
                 i = stream.indexOf("\n", i);
             }
         }
@@ -102,7 +108,13 @@ function _parse(stream, ptr) {
                     lastbrk = undefined;  // Ignore this sentry if it's the second bracketed expression
                 }
                 else {
-                    deserialized[laststr] = string;
+                    if (laststr in deserialized) {
+                        if (!Array.isArray(deserialized[laststr])) deserialized[laststr] = [deserialized[laststr]];
+                        deserialized[laststr].push(string);
+                    }
+                    else {
+                        deserialized[laststr] = string;
+                    }
                 }
             }
             c = STRING;  // Force c == string so lasttok will be set properly.
