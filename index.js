@@ -149,6 +149,7 @@ function _dump(obj, indent, mult) {
     var nodes = [];
 
     for (var k in obj) {
+        if (!obj.hasOwnProperty(k)) continue;
         var v = obj[k];
         if (typeof v === 'object' && !(v instanceof Array)) {
             nodes.push(util.format(nodefmt, k, _dump(v, indent, mult)));
