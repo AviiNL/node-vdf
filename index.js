@@ -155,8 +155,9 @@ function _dump(obj, indent, mult) {
             nodes.push(util.format(nodefmt, k, _dump(v, indent, mult)));
         }
         else if (v instanceof Array) {
-            lst = v.map(function(more_v){ return util.format(lstfmt, more_v); });
-            nodes.push(util.format(nodefmt, k, lst.join("\n") + '\n'));
+            lst = v.map(function(more_v){
+                nodes.push(`  "${k}" "${more_v}"\n`);
+            });
         }
         else {
             nodes.push(util.format(podfmt, k, v));
