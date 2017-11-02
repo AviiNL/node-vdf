@@ -40,7 +40,6 @@ function _symtostr(line, i, token) {
     var n = finalstr.indexOf('//');
     finalstr = finalstr.substring(0, n !== -1 ? n : finalstr.length).replace(/"/g, '').trim();
 
-    console.log(`'${finalstr}'`);
     return [finalstr, i + finalstr.length + 1];
 }
 
