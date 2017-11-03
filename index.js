@@ -155,7 +155,7 @@ function _dump(obj, indent, mult) {
         }
         else if (v instanceof Array) {
             lst = v.map(function(more_v){
-                nodes.push(`  "${k}" "${more_v}"\n`);
+                nodes.push(`${' '.repeat(indent+1)}"${k}" "${more_v}"\n`);
             });
         }
         else {
