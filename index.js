@@ -155,6 +155,10 @@ function _dump(obj, indent, mult) {
         }
         else if (v instanceof Array) {
             lst = v.map(function(more_v){
+                if(typeof more_v === 'object') {
+                    nodes.push(util.format(nodefmt, k, _dump(more_v, indent, mult)));
+                    return;
+                }
                 nodes.push(`${' '.repeat(indent+1)}"${k}" "${more_v}"\n`);
             });
         }
