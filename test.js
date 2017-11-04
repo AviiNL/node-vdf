@@ -132,11 +132,11 @@ var SIMPLE_OBJ = EXPECTED_UNQUOTED_VDF,
     EXPECTED_SUBNODE_OBJ = SUBNODE_OBJ,
 
     EXPECTED_ARRAY_OBJ = {
-        "array": {
-            "a": "1",
-            "b": "1",
-            "c": "1"
-        }
+        "array": [
+            "a",
+            "b",
+            "c"
+        ]
     },
 
     EXPECTED_NUMERICAL_OBJ = {
@@ -150,14 +150,14 @@ var SIMPLE_OBJ = EXPECTED_UNQUOTED_VDF,
             "subnode": {
                 "key": "value"
             },
-            "array": {
-                "a": "1",
-                "b": "1",
-                "c": "1",
-                "1": "1",
-                "2": "1",
-                "3": "1"
-            },
+            "array": [
+                "a",
+                "b",
+                "c",
+                "1",
+                "2",
+                "3"
+            ],
             "number": "1024"
         }
     };

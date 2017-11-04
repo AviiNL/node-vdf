@@ -51,7 +51,7 @@ function _unquotedtostr(line, i) {
         }
         ci += 1;
     }
-    return [line.substring(i, ci-1), ci-1];
+    return [line.substring(i, ci), ci];
 }
 
 function _parse(stream, ptr) {
